@@ -1,3 +1,5 @@
 [submodule "Pandemonium-Math"]
 	path = Pandemonium-Math
 	url = https://github.com/Alpasyon007/Pandemonium-Math.git
+[submodule "Pandemonium-Log"]
+	url = https://github.com/Alpasyon007/Pandemonium-Log
