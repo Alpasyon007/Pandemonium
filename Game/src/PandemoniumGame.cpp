@@ -2,13 +2,9 @@
 
 class PandemoniumGame : public Pandemonium::Application {
 public:
-    PandemoniumGame() {
+	PandemoniumGame() {}
 
-    }
-
-    ~PandemoniumGame() {
-
-    }
+	~PandemoniumGame() {}
 };
 
 Pandemonium::Application* Pandemonium::CreateApplication() {
@@ -26,5 +22,5 @@ Pandemonium::Application* Pandemonium::CreateApplication() {
 	// LOG_WARN("HELLO %d %s", a, b);
 	// LOG_ERROR("HELLO %d %s", a, b);
 
-    return new PandemoniumGame();
+	return new PandemoniumGame();
 }

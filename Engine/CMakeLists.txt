@@ -44,15 +44,15 @@ add_library(PandemoniumLog)
 add_library(PandemoniumMath)
 add_library(PandemoniumPreCompiled)
 add_library(PandemoniumEvents)
+add_library(PandemoniumRenderer)
 # add_library(PandemoniumCore)
-# add_library(PandemoniumRenderer)
 
-# add_subdirectory(Pandemonium-Renderer)
 # add_subdirectory(Pandemonium-Core)
 add_subdirectory(Pandemonium-Log)
 add_subdirectory(Pandemonium-Math)
 add_subdirectory(Pandemonium-Events)
 add_subdirectory(Pandemonium-PreCompiled)
+add_subdirectory(Pandemonium-Renderer)
 # add_subdirectory(Pandemonium-Core)
 
 # Add the executable
@@ -86,6 +86,9 @@ include_directories(
 	Pandemonium-Math/Pandemonium-Mat/headers
 	Pandemonium-Events/headers
 	Pandemonium-PreCompiled/headers
+	Pandemonium-Renderer/headers
+	Pandemonium-Renderer/Platform/Windows
+	Pandemonium-Renderer/glfw
 )
 
 target_link_libraries(
@@ -93,7 +96,9 @@ target_link_libraries(
 	PRIVATE
 	PandemoniumMath
 	PandemoniumPreCompiled
+	PandemoniumRenderer
 	# PandemoniumCore
 	# ${VULKAN_PATH}/Lib/vulkan-1.lib
-	# glfw
+	glfw
+	opengl32.lib
 )

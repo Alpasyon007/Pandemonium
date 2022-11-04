@@ -44,6 +44,7 @@ target_include_directories(
 	${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Mat/headers
 	${ENGINE_PATH}/Pandemonium-Events/headers
 	${ENGINE_PATH}/Pandemonium-PreCompiled/headers
+	${ENGINE_PATH}/Pandemonium-Renderer/headers
 )
 
 target_link_libraries(
