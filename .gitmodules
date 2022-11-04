@@ -10,6 +10,9 @@
 [submodule "Pandemonium-Events"]
 	path = Engine/Pandemonium-Events
 	url = https://github.com/Alpasyon007/Pandemonium-Log.git
-[submodule "Engine/Pandemonium-Renderer"]
+[submodule "Pandemonium-Renderer"]
 	path = Engine/Pandemonium-Renderer
 	url = https://github.com/Alpasyon007/Pandemonium-Renderer.git
+[submodule "glfw"]
+	path = ThirdParty/glfw
+	url = https://github.com/glfw/glfw.git
