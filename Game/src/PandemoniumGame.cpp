@@ -1,8 +1,19 @@
 #include <Pandemonium.h>
 
+class ExampleLayer : public Pandemonium::Layer {
+public:
+	ExampleLayer() : Layer("Example") {}
+
+	void OnUpdate() override {
+		// LOG_INFO("ExampleLayer::Update");
+	}
+
+	void OnEvent(Pandemonium::Event& e) override { LOG_INFO(e.ToString().data()); }
+};
+
 class PandemoniumGame : public Pandemonium::Application {
 public:
-	PandemoniumGame() {}
+	PandemoniumGame() { PushLayer(new ExampleLayer()); }
 
 	~PandemoniumGame() {}
 };

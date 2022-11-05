@@ -3,5 +3,6 @@
 
 #include "Application.h"
 #include "EntryPoint.h"
+#include "Layer.h"
 
-#endif /* PANDEMONIUM_H */ 
+#endif /* PANDEMONIUM_H */

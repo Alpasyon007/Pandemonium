@@ -63,12 +63,16 @@ add_library(
 	SHARED
 	"Include/Pandemonium.h"
 	Pandemonium-Core/Include/PandemoniumCore.h
-	Pandemonium-Core/headers/Core.h
-	Pandemonium-Core/src/Core.cpp
-	Pandemonium-Core/headers/Application.h
-	Pandemonium-Core/src/Application.cpp
-	Pandemonium-Core/headers/EntryPoint.h
 	Pandemonium-Core/headers/Window.h
+	Pandemonium-Core/headers/EntryPoint.h
+	Pandemonium-Core/src/Core.cpp
+	Pandemonium-Core/headers/Core.h
+	Pandemonium-Core/src/Application.cpp
+	Pandemonium-Core/headers/Application.h
+	Pandemonium-Core/src/Layer.cpp
+	Pandemonium-Core/headers/Layer.h
+	Pandemonium-Core/src/LayerStack.cpp
+	Pandemonium-Core/headers/LayerStack.h
 )
 
 target_precompile_headers(

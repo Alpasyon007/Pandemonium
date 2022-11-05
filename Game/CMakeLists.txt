@@ -13,7 +13,7 @@ set(ENGINE_LIB_PATH ${CMAKE_CURRENT_BINARY_DIR}/Engine/Debug/Pandemonium.lib)
 set(ENGINE_PATH "../Engine")
 
 if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Zc:preprocessor")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Zc:preprocessor -MDd")
 endif()
 
 # Define Windows Plaftorm if on Windows
@@ -21,6 +21,10 @@ if (WIN32)
     add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
     add_compile_definitions(PANDEMONIUM_BUILD_DLL)
 endif()
+
+message(STATUS "\n-- ------------------------------------------------------------------------------------------------------")
+message(STATUS "Building PandemoniumGame with ${CMAKE_CXX_COMPILER_ID} using flags: ${CMAKE_CXX_FLAGS}")
+message(STATUS "------------------------------------------------------------------------------------------------------\n--")
 
 # Set the project name
 project(PandemoniumGame)
@@ -31,6 +35,8 @@ add_executable(
 	PandemoniumGame
 	${CMAKE_CURRENT_SOURCE_DIR}/src/PandemoniumGame.cpp
 )
+
+set_property(TARGET PandemoniumGame PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
 target_include_directories(
 	PandemoniumGame
