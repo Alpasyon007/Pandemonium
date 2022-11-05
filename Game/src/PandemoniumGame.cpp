@@ -8,7 +8,7 @@ public:
 		// LOG_INFO("ExampleLayer::Update");
 	}
 
-	void OnEvent(Pandemonium::Event& e) override { LOG_INFO(e.ToString().data()); }
+	void OnEvent(Pandemonium::Event& e) override { LOG_INFO(e.ToString()); }
 };
 
 class PandemoniumGame : public Pandemonium::Application {
