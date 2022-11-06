@@ -14,5 +14,8 @@
 	path = Engine/Pandemonium-Renderer
 	url = https://github.com/Alpasyon007/Pandemonium-Renderer.git
 [submodule "glfw"]
-	path =Engine/ThirdParty/glfw
+	path = Engine/ThirdParty/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "imgui"]
+	path = Engine/ThirdParty/imgui
+	url = https://github.com/Alpasyon007/imgui.git
