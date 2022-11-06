@@ -9,7 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_COMPILER_ID MSVC)
 
 set(ENGINE_DLL_PATH ${CMAKE_CURRENT_BINARY_DIR}/Engine/Debug/Pandemonium.dll)
-set(ENGINE_LIB_PATH ${CMAKE_CURRENT_BINARY_DIR}/Engine/Debug/Pandemonium.lib)
 set(ENGINE_PATH "../Engine")
 
 if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
@@ -20,6 +19,7 @@ endif()
 if (WIN32)
     add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
     add_compile_definitions(PANDEMONIUM_BUILD_DLL)
+    # add_compile_definitions(GLFW_INCLUDE_NONE)
 endif()
 
 message(STATUS "\n-- ------------------------------------------------------------------------------------------------------")
@@ -51,12 +51,13 @@ target_include_directories(
 	${ENGINE_PATH}/Pandemonium-Events/headers
 	${ENGINE_PATH}/Pandemonium-PreCompiled/headers
 	${ENGINE_PATH}/Pandemonium-Renderer/headers
+	${ENGINE_PATH}/Pandemonium-ImGui/headers
 )
 
 target_link_libraries(
 	PandemoniumGame 
 	PRIVATE
-	${ENGINE_LIB_PATH}
+	Pandemonium
 )
 
 add_custom_command(TARGET PandemoniumGame POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${ENGINE_DLL_PATH} ${CMAKE_CURRENT_BINARY_DIR}/Debug)
