@@ -1,6 +1,8 @@
 #ifndef WINDOWS_WINDOW_H
 #define WINDOWS_WINDOW_H
 
+#define GLFW_INCLUDE_NONE
+
 #include "Window.h"
 #include <glfw/glfw3.h>
 

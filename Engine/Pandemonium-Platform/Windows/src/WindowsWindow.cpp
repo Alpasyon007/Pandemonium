@@ -5,6 +5,8 @@
 #include "KeyEvent.h"
 #include "MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Pandemonium {
 	static bool s_GLFWInitialized = false;
 
@@ -32,6 +34,8 @@ namespace Pandemonium {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		ASSERT(status, "Could not initalize GLAD!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -69,6 +73,13 @@ namespace Pandemonium {
 			}
 		});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+			WindowData&	  data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -92,9 +103,9 @@ namespace Pandemonium {
 		});
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
-			WindowData&	   data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+			WindowData&		data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
-			MouseMoveEvent event(static_cast<float>(xPos), static_cast<float>(yPos));
+			MouseMovedEvent event(static_cast<float>(xPos), static_cast<float>(yPos));
 			data.EventCallback(event);
 		});
 	}
