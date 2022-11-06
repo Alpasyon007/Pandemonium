@@ -13,7 +13,10 @@ public:
 
 class PandemoniumGame : public Pandemonium::Application {
 public:
-	PandemoniumGame() { PushLayer(new ExampleLayer()); }
+	PandemoniumGame() {
+		PushLayer(new ExampleLayer());
+		PushOverlay(new Pandemonium::ImGuiLayer());
+	}
 
 	~PandemoniumGame() {}
 };
