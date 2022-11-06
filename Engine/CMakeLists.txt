@@ -40,22 +40,27 @@ endif()
 # Set the project name
 project(Pandemonium)
 
+# Pandemonium Libs
 add_library(PandemoniumLog)
 add_library(PandemoniumMath)
 add_library(PandemoniumPreCompiled)
 add_library(PandemoniumEvents)
-# add_library(PandemoniumRenderer)
+add_library(PandemoniumImGui)
 add_library(PandemoniumPlatform)
-# add_library(PandemoniumCore)
 
-# add_subdirectory(Pandemonium-Core)
 add_subdirectory(Pandemonium-Log)
 add_subdirectory(Pandemonium-Math)
 add_subdirectory(Pandemonium-Events)
 add_subdirectory(Pandemonium-PreCompiled)
-# add_subdirectory(Pandemonium-Renderer)
 add_subdirectory(Pandemonium-Platform)
-# add_subdirectory(Pandemonium-Core)
+add_subdirectory(Pandemonium-ImGui)
+
+# Third Party Libs
+add_library(glad)
+add_library(imgui)
+
+add_subdirectory(ThirdParty/glad)
+add_subdirectory(ThirdParty/imgui)
 
 # Add the executable
 add_library(
@@ -95,7 +100,10 @@ include_directories(
 	Pandemonium-PreCompiled/headers
 	Pandemonium-Renderer/headers
 	Pandemonium-Platform/Windows/headers
+	Pandemonium-ImGui/headers
 	ThirdParty/glfw
+	ThirdParty/glad/include
+	ThirdParty/imgui
 )
 
 target_link_libraries(
@@ -105,6 +113,9 @@ target_link_libraries(
 	PandemoniumPreCompiled
 	# PandemoniumRenderer
 	PandemoniumPlatform
+	PandemoniumImGui
+	glad
+	imgui
 	# PandemoniumCore
 	# ${VULKAN_PATH}/Lib/vulkan-1.lib
 	glfw
