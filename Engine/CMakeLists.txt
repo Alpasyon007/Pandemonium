@@ -78,6 +78,7 @@ add_library(
 	Pandemonium-Core/headers/Layer.h
 	Pandemonium-Core/src/LayerStack.cpp
 	Pandemonium-Core/headers/LayerStack.h
+	Pandemonium-Core/headers/Input.h
 )
 
 target_precompile_headers(

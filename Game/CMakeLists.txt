@@ -13,6 +13,7 @@ set(ENGINE_PATH "../Engine")
 
 if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Zc:preprocessor -MDd")
+	add_compile_options("/wd4251" "/MDd")
 endif()
 
 # Define Windows Plaftorm if on Windows
