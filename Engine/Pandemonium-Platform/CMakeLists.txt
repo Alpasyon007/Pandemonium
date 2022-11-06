@@ -9,6 +9,8 @@ target_sources(
 	PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsWindow.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsWindow.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/imgui_impl_opengl3.h
+	${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/imgui_impl_opengl3.cpp
 )
 
 target_include_directories(
@@ -16,6 +18,8 @@ target_include_directories(
 	PUBLIC 
 	${CMAKE_CURRENT_SOURCE_DIR}/headers
 	../ThirdParty/glfw/Include
+	../ThirdParty/imgui
+	../ThirdParty/imgui/backends
 )
 
 # target_link_libraries(
