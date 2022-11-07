@@ -43,16 +43,17 @@ target_include_directories(
 	PandemoniumGame
 	PRIVATE
 	${ENGINE_PATH}/Include
-	${ENGINE_PATH}/Pandemonium-Math/Include
+	# ${ENGINE_PATH}/Pandemonium-Math/Include
 	${ENGINE_PATH}/Pandemonium-Log/Include
 	${ENGINE_PATH}/Pandemonium-Core/headers
 	${ENGINE_PATH}/Pandemonium-Log/headers
-	${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Vec/headers
-	${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Mat/headers
+	# ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Vec/headers
+	# ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Mat/headers
 	${ENGINE_PATH}/Pandemonium-Events/headers
 	${ENGINE_PATH}/Pandemonium-PreCompiled/headers
-	${ENGINE_PATH}/Pandemonium-Renderer/headers
+	# ${ENGINE_PATH}/Pandemonium-Renderer/headers
 	${ENGINE_PATH}/Pandemonium-ImGui/headers
+	${ENGINE_PATH}/Pandemonium-Platform/Windows/headers
 )
 
 target_link_libraries(

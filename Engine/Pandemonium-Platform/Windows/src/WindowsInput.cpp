@@ -6,13 +6,11 @@
 
 namespace Pandemonium {
 
-	Input* Input::s_Instance = new WindowsInput();
+	bool WindowsInput::IsKeyPressedImpl(int keycode) {
+		GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		int			state  = glfwGetKey(window, keycode);
 
-	bool   WindowsInput::IsKeyPressedImpl(int keycode) {
-		  GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		  int		  state	 = glfwGetKey(window, keycode);
-
-		  return state == GLFW_PRESS || state == GLFW_REPEAT;
+		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	bool WindowsInput::IsMouseButtonPressedImpl(int button) {

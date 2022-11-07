@@ -47,6 +47,7 @@ add_library(PandemoniumPreCompiled)
 add_library(PandemoniumEvents)
 add_library(PandemoniumImGui)
 add_library(PandemoniumPlatform)
+add_library(PandemoniumCore)
 
 add_subdirectory(Pandemonium-Log)
 add_subdirectory(Pandemonium-Math)
@@ -54,6 +55,7 @@ add_subdirectory(Pandemonium-Events)
 add_subdirectory(Pandemonium-PreCompiled)
 add_subdirectory(Pandemonium-Platform)
 add_subdirectory(Pandemonium-ImGui)
+add_subdirectory(Pandemonium-Core)
 
 # Third Party Libs
 add_library(glad)
@@ -67,18 +69,6 @@ add_library(
 	Pandemonium
 	SHARED
 	"Include/Pandemonium.h"
-	Pandemonium-Core/Include/PandemoniumCore.h
-	Pandemonium-Core/headers/Window.h
-	Pandemonium-Core/headers/EntryPoint.h
-	Pandemonium-Core/src/Core.cpp
-	Pandemonium-Core/headers/Core.h
-	Pandemonium-Core/src/Application.cpp
-	Pandemonium-Core/headers/Application.h
-	Pandemonium-Core/src/Layer.cpp
-	Pandemonium-Core/headers/Layer.h
-	Pandemonium-Core/src/LayerStack.cpp
-	Pandemonium-Core/headers/LayerStack.h
-	Pandemonium-Core/headers/Input.h
 )
 
 target_precompile_headers(
@@ -110,6 +100,7 @@ include_directories(
 target_link_libraries(
 	Pandemonium
 	PRIVATE
+	PandemoniumCore
 	PandemoniumMath
 	PandemoniumPreCompiled
 	# PandemoniumRenderer
