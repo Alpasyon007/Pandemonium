@@ -5,12 +5,14 @@ public:
 	ExampleLayer() : Layer("Example") {}
 
 	void OnUpdate() override {
+
 		if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_TAB)) { LOG_INFO("Tab key is pressed"); }
 	}
 
 	void OnEvent(Pandemonium::Event& e) override {
 		if(e.GetEventType() == Pandemonium::EventType::KeyPressed) {
 			Pandemonium::KeyPressedEvent& event = (Pandemonium::KeyPressedEvent&)e;
+			if(event.GetKeyCode() == PANDEMONIUM_KEY_TAB) { LOG_INFO("Tab key is pressed"); }
 			LOG_INFO("%c", (char)event.GetKeyCode());
 		}
 	}

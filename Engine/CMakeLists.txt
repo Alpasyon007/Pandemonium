@@ -95,6 +95,7 @@ include_directories(
 	ThirdParty/glfw
 	ThirdParty/glad/include
 	ThirdParty/imgui
+	ThirdParty/glm
 )
 
 target_link_libraries(
