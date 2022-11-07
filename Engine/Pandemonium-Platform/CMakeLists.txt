@@ -11,8 +11,6 @@ target_sources(
 	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsWindow.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsInput.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsInput.h
-	${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/imgui_impl_opengl3.h
-	${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/imgui_impl_opengl3.cpp
 )
 
 target_include_directories(
