@@ -6,25 +6,23 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/glfw ${CMAKE_CURRENT_
 
 target_sources(
 	PandemoniumPlatform
-	PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsWindow.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsWindow.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsInput.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsInput.h
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsWindow.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsWindow.h
+			${CMAKE_CURRENT_SOURCE_DIR}/Windows/src/WindowsInput.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsInput.h
+			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/headers/OpenGLContext.h
+			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/src/OpenGLContext.cpp
 )
 
 target_include_directories(
-	PandemoniumPlatform 
-	PUBLIC 
-	${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers
-	${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/glfw/Include
-	${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui
-	${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui/backends
-	${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-Core/headers
+	PandemoniumPlatform
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers
+			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/headers
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/glfw/Include
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui/backends
+			${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-Core/headers
+			${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-PandemoniumRenderer/headers
 )
 
-# target_link_libraries(
-#     PandemoniumPlatform
-#     PRIVATE
-#     glfw
-# )
+# target_link_libraries( PandemoniumPlatform PRIVATE glfw )

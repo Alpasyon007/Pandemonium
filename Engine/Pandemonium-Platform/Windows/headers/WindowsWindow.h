@@ -6,6 +6,8 @@
 #include "Window.h"
 #include <glfw/glfw3.h>
 
+#include "GraphicsContext.h"
+
 namespace Pandemonium {
 	class WindowsWindow : public Window {
 	public:
@@ -28,7 +30,8 @@ namespace Pandemonium {
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
-		GLFWwindow* m_Window;
+		GLFWwindow*		 m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData {
 			std::string		Title;

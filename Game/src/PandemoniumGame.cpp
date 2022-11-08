@@ -1,5 +1,7 @@
 #include <Pandemonium.h>
 
+#include "imgui.h"
+
 class ExampleLayer : public Pandemonium::Layer {
 public:
 	ExampleLayer() : Layer("Example") {}
@@ -7,6 +9,12 @@ public:
 	void OnUpdate() override {
 
 		if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_TAB)) { LOG_INFO("Tab key is pressed"); }
+	}
+
+	virtual void OnImGuiRender() override {
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEvent(Pandemonium::Event& e) override {

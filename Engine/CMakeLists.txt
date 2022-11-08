@@ -7,32 +7,22 @@ cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Set Variables
-# set(SOURCE_DIR src)
-# set(VULKAN_PATH C:/VulkanSDK/1.3.231.1)
-# set(GLFW_PATH glfw)
+# Set Variables set(SOURCE_DIR src) set(VULKAN_PATH C:/VulkanSDK/1.3.231.1) set(GLFW_PATH glfw)
 
-# set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-# set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-# set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE) set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE) set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-# set(LOG_DIR Pandemonium-Log)
-# set(MATH_DIR Pandemonium-Math)
-# set(RENDERER_DIR Pandemonium-Renderer)
+# set(LOG_DIR Pandemonium-Log) set(MATH_DIR Pandemonium-Math) set(RENDERER_DIR Pandemonium-Renderer)
 
-# set(LOG_SOURCE_DIR Pandemonium-Log/src)
-# set(MATH_SOURCE_DIR Pandemonium-Math/src)
-# set(RENDERER_SOURCE_DIR Pandemonium-Renderer/src)
+# set(LOG_SOURCE_DIR Pandemonium-Log/src) set(MATH_SOURCE_DIR Pandemonium-Math/src) set(RENDERER_SOURCE_DIR Pandemonium-Renderer/src)
 
-# set(CMAKE_CXX_COMPILER_ID MSVC)
-# set(VULKAN_PATH C:/VulkanSDK/1.3.231.1)
+# set(CMAKE_CXX_COMPILER_ID MSVC) set(VULKAN_PATH C:/VulkanSDK/1.3.231.1)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
+if(CMAKE_CXX_COMPILER_ID MATCHES MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Zc:preprocessor")
 endif()
 
 # Define Windows Plaftorm if on Windows
-if (WIN32)
+if(WIN32)
 	add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
 	add_compile_definitions(PANDEMONIUM_BUILD_DLL)
 endif()
@@ -65,17 +55,15 @@ add_subdirectory(ThirdParty/glad)
 add_subdirectory(ThirdParty/imgui)
 
 # Add the executable
-add_library(
-	Pandemonium
-	SHARED
-	"Include/Pandemonium.h"
-)
+add_library(Pandemonium SHARED "Include/Pandemonium.h")
 
-target_precompile_headers(
-	Pandemonium 
-	PRIVATE 
-	Pandemonium-PreCompiled/headers/ppch.h
-)
+# Define Windows Plaftorm if on Windows
+if(WIN32)
+	target_compile_definitions(Pandemonium PRIVATE "IMGUI_API=__declspec(dllexport)")
+	# target_compile_definitions(PandemoniumGame PRIVATE PANDEMONIUM_PLATFORM_WINDOWS) target_compile_definitions(PandemoniumGame PRIVATE PANDEMONIUM_BUILD_DLL)
+endif()
+
+target_precompile_headers(Pandemonium PRIVATE Pandemonium-PreCompiled/headers/ppch.h)
 
 include_directories(
 	Pandemonium
@@ -91,6 +79,7 @@ include_directories(
 	Pandemonium-PreCompiled/headers
 	Pandemonium-Renderer/headers
 	Pandemonium-Platform/Windows/headers
+	Pandemonium-Platform/OpenGL/headers
 	Pandemonium-ImGui/headers
 	ThirdParty/glfw
 	ThirdParty/glad/include
@@ -100,17 +89,15 @@ include_directories(
 
 target_link_libraries(
 	Pandemonium
-	PRIVATE
-	PandemoniumCore
-	PandemoniumMath
-	PandemoniumPreCompiled
-	# PandemoniumRenderer
-	PandemoniumPlatform
-	PandemoniumImGui
-	glad
-	imgui
-	# PandemoniumCore
-	# ${VULKAN_PATH}/Lib/vulkan-1.lib
-	glfw
-	opengl32.lib
+	PRIVATE PandemoniumCore
+			PandemoniumMath
+			PandemoniumPreCompiled
+			# PandemoniumRenderer
+			PandemoniumPlatform
+			PandemoniumImGui
+			glad
+			imgui
+			# PandemoniumCore ${VULKAN_PATH}/Lib/vulkan-1.lib
+			glfw
+			opengl32.lib
 )
