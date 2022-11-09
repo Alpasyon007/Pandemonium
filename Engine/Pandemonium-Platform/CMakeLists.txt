@@ -12,6 +12,8 @@ target_sources(
 			${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers/WindowsInput.h
 			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/headers/OpenGLContext.h
 			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/src/OpenGLContext.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/headers/OpenGLBuffer.h
+			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/src/OpenGLBuffer.cpp
 )
 
 target_include_directories(
