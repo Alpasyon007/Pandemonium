@@ -38,6 +38,7 @@ add_library(PandemoniumEvents)
 add_library(PandemoniumImGui)
 add_library(PandemoniumPlatform)
 add_library(PandemoniumCore)
+add_library(PandemoniumRenderer)
 
 add_subdirectory(Pandemonium-Log)
 add_subdirectory(Pandemonium-Math)
@@ -46,6 +47,7 @@ add_subdirectory(Pandemonium-PreCompiled)
 add_subdirectory(Pandemonium-Platform)
 add_subdirectory(Pandemonium-ImGui)
 add_subdirectory(Pandemonium-Core)
+add_subdirectory(Pandemonium-Renderer)
 
 # Third Party Libs
 add_library(glad)
@@ -92,12 +94,12 @@ target_link_libraries(
 	PRIVATE PandemoniumCore
 			PandemoniumMath
 			PandemoniumPreCompiled
-			# PandemoniumRenderer
+			PandemoniumRenderer
 			PandemoniumPlatform
 			PandemoniumImGui
 			glad
 			imgui
-			# PandemoniumCore ${VULKAN_PATH}/Lib/vulkan-1.lib
+			# ${VULKAN_PATH}/Lib/vulkan-1.lib
 			glfw
 			opengl32.lib
 )

@@ -51,18 +51,16 @@ target_include_directories(
 			# ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Vec/headers ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Mat/headers
 			${ENGINE_PATH}/Pandemonium-Events/headers
 			${ENGINE_PATH}/Pandemonium-PreCompiled/headers
-			# ${ENGINE_PATH}/Pandemonium-Renderer/headers
+			${ENGINE_PATH}/Pandemonium-Renderer/headers
 			${ENGINE_PATH}/Pandemonium-ImGui/headers
 			${ENGINE_PATH}/Pandemonium-Platform/Windows/headers
 			${ENGINE_PATH}/ThirdParty/glm
-			${ENGINE_PATH}/ThirdParty/imgui)
+			${ENGINE_PATH}/ThirdParty/imgui
+)
 
 target_link_libraries(PandemoniumGame PRIVATE Pandemonium)
 
-add_custom_command(
-	TARGET PandemoniumGame
-	POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy ${ENGINE_DLL_PATH} ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+add_custom_command(TARGET PandemoniumGame POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${ENGINE_DLL_PATH} ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 
 # # Remove old DLL file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Debug/Pandemonium.dll)
 
