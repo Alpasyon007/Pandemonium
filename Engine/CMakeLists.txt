@@ -70,6 +70,7 @@ target_precompile_headers(Pandemonium PRIVATE Pandemonium-PreCompiled/headers/pp
 include_directories(
 	Pandemonium
 	PRIVATE
+	# Pandemonium
 	Pandemonium-Core/Include
 	Pandemonium-Log/Include
 	Pandemonium-Math/Include
@@ -83,6 +84,7 @@ include_directories(
 	Pandemonium-Platform/Windows/headers
 	Pandemonium-Platform/OpenGL/headers
 	Pandemonium-ImGui/headers
+	# Third Party
 	ThirdParty/glfw
 	ThirdParty/glad/include
 	ThirdParty/imgui
@@ -91,12 +93,14 @@ include_directories(
 
 target_link_libraries(
 	Pandemonium
-	PRIVATE PandemoniumCore
+	PRIVATE # Pandemonium
+			PandemoniumCore
 			PandemoniumMath
 			PandemoniumPreCompiled
 			PandemoniumRenderer
 			PandemoniumPlatform
 			PandemoniumImGui
+			# Third Party
 			glad
 			imgui
 			# ${VULKAN_PATH}/Lib/vulkan-1.lib
