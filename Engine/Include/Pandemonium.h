@@ -10,10 +10,15 @@
 #include "KeyCodes.h"
 #include "MouseButtonCodes.h"
 
-// TEMP - SHOULD NOT BE INCLUDED
-#include "WindowsInput.h"
-// TEMP - SHOULD NOT BE INCLUDED
-
 #include "ImGuiLayer.h"
+
+#include "RenderCommand.h"
+#include "Renderer.h"
+
+#include "Buffer.h"
+#include "Shader.h"
+#include "VertexArray.h"
+
+#include "OrthographicCamera.h"
 
 #endif /* PANDEMONIUM_H */
