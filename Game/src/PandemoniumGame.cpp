@@ -4,7 +4,7 @@
 
 class ExampleLayer : public Pandemonium::Layer {
 public:
-	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f) {
+	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f) {
 		m_VertexArray.reset(Pandemonium::VertexArray::Create());
 
 		float									   vertices[3 * 7] = {-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
@@ -102,12 +102,29 @@ public:
 		m_BlueShader.reset(new Pandemonium::Shader(blueVertexSrc, blueFragmentSrc));
 	}
 
-	void OnUpdate() override {
+	void OnUpdate(Pandemonium::Timestep ts) override {
+		if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_LEFT)) {
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		} else if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_RIGHT)) {
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+		}
+		if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_UP)) {
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
+		} else if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_DOWN)) {
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+		}
+
+		if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_A)) {
+			m_CameraRotation += m_CameraRotationSpeed * ts;
+		} else if(Pandemonium::Input::IsKeyPressed(PANDEMONIUM_KEY_F)) {
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		}
+
 		Pandemonium::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
 		Pandemonium::RenderCommand::Clear();
 
-		m_Camera.SetPosition({0.5f, 0.5f, 0.0f});
-		m_Camera.SetRotation(45.0f);
+		m_Camera.SetPosition(m_CameraPosition);
+		m_Camera.SetRotation(m_CameraRotation);
 
 		Pandemonium::Renderer::BeginScene(m_Camera);
 
@@ -119,7 +136,7 @@ public:
 
 	virtual void OnImGuiRender() override {}
 
-	void		 OnEvent(Pandemonium::Event& e) override {}
+	void		 OnEvent(Pandemonium::Event& event) override {}
 private:
 	std::shared_ptr<Pandemonium::Shader>	  m_Shader;
 	std::shared_ptr<Pandemonium::VertexArray> m_VertexArray;
@@ -128,6 +145,11 @@ private:
 	std::shared_ptr<Pandemonium::Shader>	  m_BlueShader;
 
 	Pandemonium::OrthographicCamera			  m_Camera;
+	glm::vec3								  m_CameraPosition;
+	float									  m_CameraMoveSpeed		= 1.0f;
+
+	float									  m_CameraRotation		= 0.0f;
+	float									  m_CameraRotationSpeed = 30.0f;
 };
 
 class PandemoniumGame : public Pandemonium::Application {
