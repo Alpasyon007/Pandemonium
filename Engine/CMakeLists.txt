@@ -52,9 +52,11 @@ add_subdirectory(Pandemonium-Renderer)
 # Third Party Libs
 add_library(glad)
 add_library(imgui)
+add_library(stb_image)
 
 add_subdirectory(ThirdParty/glad)
 add_subdirectory(ThirdParty/imgui)
+add_subdirectory(ThirdParty/stb)
 
 # Add the executable
 add_library(Pandemonium SHARED "Include/Pandemonium.h")
@@ -89,6 +91,7 @@ include_directories(
 	ThirdParty/glad/include
 	ThirdParty/imgui
 	ThirdParty/glm
+	ThirdParty/stb
 )
 
 target_link_libraries(
@@ -106,4 +109,5 @@ target_link_libraries(
 			# ${VULKAN_PATH}/Lib/vulkan-1.lib
 			glfw
 			opengl32.lib
+			stb_image
 )

@@ -12,32 +12,33 @@ public:
 	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f) {
 		m_VertexArray.reset(Pandemonium::VertexArray::Create());
 
-		float									   vertices[3 * 7] = {-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
-																	  0.3f,	 0.8f,	1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f};
+		float										vertices[3 * 7] = {-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
+																	   0.3f,  0.8f,	 1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,	1.0f};
 
-		std::shared_ptr<Pandemonium::VertexBuffer> vertexBuffer;
+		Pandemonium::Ref<Pandemonium::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Pandemonium::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Pandemonium::BufferLayout layout = {{Pandemonium::ShaderDataType::Float3, "a_Position"}, {Pandemonium::ShaderDataType::Float4, "a_Color"}};
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		unsigned int							  indices[3] = {0, 1, 2};
-		std::shared_ptr<Pandemonium::IndexBuffer> indexBuffer;
+		unsigned int							   indices[3] = {0, 1, 2};
+		Pandemonium::Ref<Pandemonium::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Pandemonium::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(Pandemonium::VertexArray::Create());
 
-		float									   squareVertices[3 * 4] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f};
+		float										squareVertices[5 * 4] = {-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f,	-0.5f, 0.0f, 1.0f, 0.0f,
+																			 0.5f,	0.5f,  0.0f, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f};
 
-		std::shared_ptr<Pandemonium::VertexBuffer> squareVB;
+		Pandemonium::Ref<Pandemonium::VertexBuffer> squareVB;
 		squareVB.reset(Pandemonium::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-		squareVB->SetLayout({{Pandemonium::ShaderDataType::Float3, "a_Position"}});
+		squareVB->SetLayout({{Pandemonium::ShaderDataType::Float3, "a_Position"}, {Pandemonium::ShaderDataType::Float2, "m_TexCoord"}});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
-		unsigned int							  squareIndices[6] = {0, 1, 2, 2, 3, 0};
-		std::shared_ptr<Pandemonium::IndexBuffer> squareIB;
+		unsigned int							   squareIndices[6] = {0, 1, 2, 2, 3, 0};
+		Pandemonium::Ref<Pandemonium::IndexBuffer> squareIB;
 		squareIB.reset(Pandemonium::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -109,6 +110,44 @@ public:
 		)";
 
 		m_FlatColorShader.reset(Pandemonium::Shader::Create(flatColorVertexSrc, flatColorFragmentSrc));
+
+		std::string textureShaderVertexSrc	 = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main() {
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main() {
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Pandemonium::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+
+		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Pandemonium::Timestep ts) override {
@@ -150,7 +189,9 @@ public:
 			}
 		}
 
-		Pandemonium::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		Pandemonium::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		// Pandemonium::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Pandemonium::Renderer::EndScene();
 	}
@@ -163,20 +204,22 @@ public:
 
 	void OnEvent(Pandemonium::Event& event) override {}
 private:
-	std::shared_ptr<Pandemonium::Shader>	  m_Shader;
-	std::shared_ptr<Pandemonium::VertexArray> m_VertexArray;
+	Pandemonium::Ref<Pandemonium::Shader>	   m_Shader;
+	Pandemonium::Ref<Pandemonium::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Pandemonium::VertexArray> m_SquareVA;
-	std::shared_ptr<Pandemonium::Shader>	  m_FlatColorShader;
+	Pandemonium::Ref<Pandemonium::VertexArray> m_SquareVA;
+	Pandemonium::Ref<Pandemonium::Shader>	   m_FlatColorShader, m_TextureShader;
 
-	Pandemonium::OrthographicCamera			  m_Camera;
-	glm::vec3								  m_CameraPosition;
-	float									  m_CameraMoveSpeed		= 1.0f;
+	Pandemonium::Ref<Pandemonium::Texture2D>   m_Texture;
 
-	float									  m_CameraRotation		= 0.0f;
-	float									  m_CameraRotationSpeed = 30.0f;
+	Pandemonium::OrthographicCamera			   m_Camera;
+	glm::vec3								   m_CameraPosition;
+	float									   m_CameraMoveSpeed	 = 1.0f;
 
-	glm::vec3								  m_SquareColor			= {0.2f, 0.3f, 0.8f};
+	float									   m_CameraRotation		 = 0.0f;
+	float									   m_CameraRotationSpeed = 30.0f;
+
+	glm::vec3								   m_SquareColor		 = {0.2f, 0.3f, 0.8f};
 };
 
 class PandemoniumGame : public Pandemonium::Application {
