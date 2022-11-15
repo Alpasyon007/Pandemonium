@@ -144,7 +144,8 @@ public:
 
 		m_TextureShader.reset(Pandemonium::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
-		m_Texture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+		m_Texture	  = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+		m_IconTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Gear-icon.png");
 
 		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -191,6 +192,10 @@ public:
 
 		m_Texture->Bind();
 		Pandemonium::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		m_IconTexture->Bind();
+		Pandemonium::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Pandemonium::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Pandemonium::Renderer::EndScene();
@@ -210,7 +215,7 @@ private:
 	Pandemonium::Ref<Pandemonium::VertexArray> m_SquareVA;
 	Pandemonium::Ref<Pandemonium::Shader>	   m_FlatColorShader, m_TextureShader;
 
-	Pandemonium::Ref<Pandemonium::Texture2D>   m_Texture;
+	Pandemonium::Ref<Pandemonium::Texture2D>   m_Texture, m_IconTexture;
 
 	Pandemonium::OrthographicCamera			   m_Camera;
 	glm::vec3								   m_CameraPosition;
