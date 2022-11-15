@@ -52,7 +52,7 @@ target_include_directories(
 			${ENGINE_PATH}/Pandemonium-PreCompiled/headers
 			${ENGINE_PATH}/Pandemonium-Renderer/headers
 			${ENGINE_PATH}/Pandemonium-ImGui/headers
-			${ENGINE_PATH}/Pandemonium-Plaftorm/OpenGL/headers
+			${ENGINE_PATH}/Pandemonium-Platform/OpenGL/headers
 			${ENGINE_PATH}/Pandemonium-Platform/Windows/headers
 			${ENGINE_PATH}/ThirdParty/glm
 			${ENGINE_PATH}/ThirdParty/imgui
