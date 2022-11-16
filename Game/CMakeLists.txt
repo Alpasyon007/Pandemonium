@@ -56,6 +56,7 @@ target_include_directories(
 			${ENGINE_PATH}/Pandemonium-Platform/Windows/headers
 			${ENGINE_PATH}/ThirdParty/glm
 			${ENGINE_PATH}/ThirdParty/imgui
+			${ENGINE_PATH}/ThirdParty/glad/include
 )
 
 target_link_libraries(PandemoniumGame PRIVATE Pandemonium)

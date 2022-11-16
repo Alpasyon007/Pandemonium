@@ -30,11 +30,11 @@ target_include_directories(
 	PandemoniumPlatform
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Windows/headers
 			${CMAKE_CURRENT_SOURCE_DIR}/OpenGL/headers
-			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/glfw/Include
-			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui
-			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui/backends
 			${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-Core/headers
 			${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-Renderer/headers
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/glfw/include
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui
+			${CMAKE_CURRENT_SOURCE_DIR}/../ThirdParty/imgui/backends
 )
 
 # target_link_libraries( PandemoniumPlatform PRIVATE glfw )
