@@ -42,7 +42,7 @@ public:
 		squareIB.reset(Pandemonium::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
-		std::string vertexSrc	= R"(
+		std::string vertexSrc			 = R"(
 			#version 330 core
 
 			layout(location = 0) in vec3 a_Position;
@@ -61,7 +61,7 @@ public:
 			}
 		)";
 
-		std::string fragmentSrc = R"(
+		std::string fragmentSrc			 = R"(
 			#version 330 core
 
 			layout(location = 0) out vec4 color;
@@ -77,7 +77,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Pandemonium::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader						 = Pandemonium::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string flatColorVertexSrc	 = R"(
 			#version 330 core
@@ -109,15 +109,15 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Pandemonium::Shader::Create(flatColorVertexSrc, flatColorFragmentSrc));
+		m_FlatColorShader				 = Pandemonium::Shader::Create("FlatColor", flatColorVertexSrc, flatColorFragmentSrc);
 
-		m_TextureShader.reset(Pandemonium::Shader::Create("C:\\dev\\Pandemonium\\Game\\assets\\shaders\\Texture.glsl"));
+		auto textureShader				 = m_ShaderLibrary.Load("C:\\dev\\Pandemonium\\Game\\assets\\shaders\\Texture.glsl");
 
-		m_Texture	  = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
-		m_IconTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Gear-icon.png");
+		m_Texture						 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+		m_IconTexture					 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Gear-icon.png");
 
-		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Pandemonium::Timestep ts) override {
@@ -159,11 +159,13 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Pandemonium::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Pandemonium::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		m_IconTexture->Bind();
-		Pandemonium::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Pandemonium::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Pandemonium::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -178,11 +180,13 @@ public:
 
 	void OnEvent(Pandemonium::Event& event) override {}
 private:
+	Pandemonium::ShaderLibrary				   m_ShaderLibrary;
+
 	Pandemonium::Ref<Pandemonium::Shader>	   m_Shader;
 	Pandemonium::Ref<Pandemonium::VertexArray> m_VertexArray;
 
 	Pandemonium::Ref<Pandemonium::VertexArray> m_SquareVA;
-	Pandemonium::Ref<Pandemonium::Shader>	   m_FlatColorShader, m_TextureShader;
+	Pandemonium::Ref<Pandemonium::Shader>	   m_FlatColorShader;
 
 	Pandemonium::Ref<Pandemonium::Texture2D>   m_Texture, m_IconTexture;
 
