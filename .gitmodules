@@ -1,3 +1,18 @@
+[submodule "Pandemonium-Math"]
+	path = Engine/Pandemonium-Math
+	url = https://github.com/Alpasyon007/Pandemonium-Math.git
+[submodule "Pandemonium-Log"]
+	path = Engine/Pandemonium-Log
+	url = https://github.com/Alpasyon007/Pandemonium-Log.git
+[submodule "Pandemonium-Core"]
+	path = Engine/Pandemonium-Core
+	url = https://github.com/Alpasyon007/Pandemonium-Core.git
+[submodule "Pandemonium-Events"]
+	path = Engine/Pandemonium-Events
+	url = https://github.com/Alpasyon007/Pandemonium-Log.git
+[submodule "Pandemonium-Renderer"]
+	path = Engine/Pandemonium-Renderer
+	url = https://github.com/Alpasyon007/Pandemonium-Renderer.git
 [submodule "glfw"]
 	path = Engine/ThirdParty/glfw
 	url = https://github.com/glfw/glfw.git
