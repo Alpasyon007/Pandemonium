@@ -23,5 +23,6 @@
 #include "VertexArray.h"
 
 #include "OrthographicCamera.h"
+#include "OrthographicCameraController.h"
 
 #endif /* PANDEMONIUM_H */
