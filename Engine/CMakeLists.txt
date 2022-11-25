@@ -23,7 +23,7 @@ endif()
 
 # Define Windows Plaftorm if on Windows
 if(WIN32)
-	add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
+	# add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
 	add_compile_definitions(PANDEMONIUM_BUILD_DLL)
 endif()
 
