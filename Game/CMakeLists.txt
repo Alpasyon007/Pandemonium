@@ -16,10 +16,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES MSVC)
 	add_compile_options("/wd4251" "/MDd" "/Zc:twoPhase-")
 endif()
 
-# Define Windows Plaftorm if on Windows
-if(WIN32)
-	add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS)
-endif()
+# # Define Windows Plaftorm if on Windows if(WIN32) add_compile_definitions(PANDEMONIUM_PLATFORM_WINDOWS) endif()
 
 message(STATUS "\n-- ------------------------------------------------------------------------------------------------------")
 message(STATUS "Building PandemoniumGame with ${CMAKE_CXX_COMPILER_ID} using flags: ${CMAKE_CXX_FLAGS}")
