@@ -27,7 +27,10 @@ project(PandemoniumGame)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/${ENGINE_PATH} ${CMAKE_CURRENT_BINARY_DIR}/Engine)
 
-add_executable(PandemoniumGame ${CMAKE_CURRENT_SOURCE_DIR}/src/PandemoniumGame.cpp)
+add_executable(
+	PandemoniumGame ${CMAKE_CURRENT_SOURCE_DIR}/src/PandemoniumGame2D.cpp ${CMAKE_CURRENT_SOURCE_DIR}/headers/PandemoniumGame2D.h
+					${CMAKE_CURRENT_SOURCE_DIR}/src/PandemoniumGame.cpp
+)
 
 set_property(TARGET PandemoniumGame PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
@@ -40,6 +43,7 @@ endif()
 target_include_directories(
 	PandemoniumGame
 	PRIVATE ${ENGINE_PATH}/Include
+			${CMAKE_CURRENT_SOURCE_DIR}/headers
 			# ${ENGINE_PATH}/Pandemonium-Math/Include
 			${ENGINE_PATH}/Pandemonium-Log/Include
 			${ENGINE_PATH}/Pandemonium-Core/headers

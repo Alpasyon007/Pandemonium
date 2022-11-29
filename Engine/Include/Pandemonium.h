@@ -1,8 +1,6 @@
 #ifndef PANDEMONIUM_H
 #define PANDEMONIUM_H
 
-#include "EntryPoint.h"
-
 #include "Application.h"
 #include "Layer.h"
 
@@ -16,6 +14,7 @@
 
 #include "RenderCommand.h"
 #include "Renderer.h"
+#include "Renderer2D.h"
 
 #include "Buffer.h"
 #include "Shader.h"
