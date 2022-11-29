@@ -21,6 +21,8 @@ private:
 	Pandemonium::Ref<Pandemonium::Shader>	   m_FlatColorShader;
 
 	glm::vec4								   m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
+
+	Pandemonium::Ref<Pandemonium::Texture2D>   m_CheckerboardTexture;
 };
 
 #endif /* PANDEMONIUM_GAME_2D */

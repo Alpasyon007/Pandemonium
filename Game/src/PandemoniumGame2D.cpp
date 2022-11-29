@@ -9,7 +9,7 @@
 
 PandemoniumGame2D::PandemoniumGame2D() : Layer("2D"), m_CameraController(1280.0f / 720.0f) {}
 
-void PandemoniumGame2D::OnAttach() {}
+void PandemoniumGame2D::OnAttach() { m_CheckerboardTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png"); }
 
 void PandemoniumGame2D::OnDetach() {}
 
@@ -22,6 +22,7 @@ void PandemoniumGame2D::OnUpdate(Pandemonium::Timestep ts) {
 	Pandemonium::Renderer2D::BeginScene(m_CameraController.GetCamera());
 	Pandemonium::Renderer2D::DrawQuad({-1.0f, 0.0f}, {0.8f, 0.8f}, {0.8f, 0.2f, 0.3f, 1.0f});
 	Pandemonium::Renderer2D::DrawQuad({0.5f, -0.5f}, {0.5f, 0.75f}, {0.2f, 0.3f, 0.8f, 1.0f});
+	Pandemonium::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f}, m_CheckerboardTexture);
 	Pandemonium::Renderer2D::EndScene();
 }
 
