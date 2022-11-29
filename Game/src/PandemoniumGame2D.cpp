@@ -20,7 +20,8 @@ void PandemoniumGame2D::OnUpdate(Pandemonium::Timestep ts) {
 	Pandemonium::RenderCommand::Clear();
 
 	Pandemonium::Renderer2D::BeginScene(m_CameraController.GetCamera());
-	Pandemonium::Renderer2D::DrawQuad({0.0f, 0.0f}, {1.0f, 1.0f}, {0.8f, 0.2f, 0.3f, 1.0f});
+	Pandemonium::Renderer2D::DrawQuad({-1.0f, 0.0f}, {0.8f, 0.8f}, {0.8f, 0.2f, 0.3f, 1.0f});
+	Pandemonium::Renderer2D::DrawQuad({0.5f, -0.5f}, {0.5f, 0.75f}, {0.2f, 0.3f, 0.8f, 1.0f});
 	Pandemonium::Renderer2D::EndScene();
 }
 
