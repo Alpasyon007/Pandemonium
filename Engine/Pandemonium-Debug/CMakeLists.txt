@@ -1,3 +1,5 @@
+set_target_properties(PandemoniumDebug PROPERTIES LINKER_LANGUAGE CXX)
+
 file(
 	GLOB_RECURSE
 	HEADERS
