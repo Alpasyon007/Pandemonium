@@ -17,6 +17,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include "Instrumentor.h"
+
 #include <PandemoniumLog.h>
 
 #if PANDEMONIUM_PLATFORM_WINDOWS

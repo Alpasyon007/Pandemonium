@@ -9,4 +9,5 @@ target_include_directories(
 	PandemoniumPreCompiled
 	PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/headers
+	${CMAKE_CURRENT_SOURCE_DIR}/../Pandemonium-Debug/headers
 )

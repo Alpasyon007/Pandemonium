@@ -39,6 +39,7 @@ add_library(PandemoniumImGui)
 add_library(PandemoniumPlatform)
 add_library(PandemoniumCore)
 add_library(PandemoniumRenderer)
+add_library(PandemoniumDebug)
 
 add_subdirectory(Pandemonium-Log)
 add_subdirectory(Pandemonium-Math)
@@ -48,6 +49,7 @@ add_subdirectory(Pandemonium-Platform)
 add_subdirectory(Pandemonium-ImGui)
 add_subdirectory(Pandemonium-Core)
 add_subdirectory(Pandemonium-Renderer)
+add_subdirectory(Pandemonium-Debug)
 
 # Third Party Libs
 add_library(glad)
@@ -86,6 +88,7 @@ include_directories(
 	Pandemonium-Platform/Windows/headers
 	Pandemonium-Platform/OpenGL/headers
 	Pandemonium-ImGui/headers
+	Pandemonium-Debug/headers
 	# Third Party
 	ThirdParty/glfw
 	ThirdParty/glad/include
