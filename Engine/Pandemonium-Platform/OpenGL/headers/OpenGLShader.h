@@ -1,7 +1,6 @@
 #ifndef OPEN_GL_SHADER_H
 #define OPEN_GL_SHADER_H
 
-#include "ppch.h"
 #include "Core.h"
 #include "Shader.h"
 #include <glad/glad.h>

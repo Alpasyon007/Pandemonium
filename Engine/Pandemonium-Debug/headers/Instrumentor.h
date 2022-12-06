@@ -1,6 +1,8 @@
 #ifndef INSTRUMENTOR_H
 #define INSTRUMENTOR_H
 
+#include "Platform.h"
+
 #include <algorithm>
 #include <chrono>
 #include <fstream>
@@ -20,7 +22,7 @@ namespace Pandemonium {
 		std::string Name;
 	};
 
-	class Instrumentor {
+	class PANDEMONIUM_API Instrumentor {
 	private:
 		InstrumentationSession* m_CurrentSession;
 		std::ofstream			m_OutputStream;
@@ -77,7 +79,7 @@ namespace Pandemonium {
 		}
 	};
 
-	class InstrumentationTimer {
+	class PANDEMONIUM_API InstrumentationTimer {
 	public:
 		InstrumentationTimer(const char* name) : m_Name(name), m_Stopped(false) { m_StartTimepoint = std::chrono::high_resolution_clock::now(); }
 
@@ -91,10 +93,12 @@ namespace Pandemonium {
 			long long start		   = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
 			long long end		   = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
-			uint32_t  threadID	   = std::hash<std::thread::id>{}(std::this_thread::get_id());
+			uint32_t  threadID	   = static_cast<uint32_t>(std::hash<std::thread::id>{}(std::this_thread::get_id()));
 			Instrumentor::Get().WriteProfile({m_Name, start, end, threadID});
 
 			m_Stopped = true;
+
+			std::cout << m_Name << " Finished Timer" << std::endl;
 		}
 	private:
 		const char*													m_Name;

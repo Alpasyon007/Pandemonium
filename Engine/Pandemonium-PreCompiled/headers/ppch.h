@@ -17,11 +17,13 @@
 #include <unordered_set>
 #include <vector>
 
-#include "Instrumentor.h"
-
 #include <PandemoniumLog.h>
 
-#if PANDEMONIUM_PLATFORM_WINDOWS
+#include "Platform.h"
+
+#include "Instrumentor.h"
+
+#if defined(PANDEMONIUM_PLATFORM_WINDOWS)
 	#include <Windows.h>
 #endif
 

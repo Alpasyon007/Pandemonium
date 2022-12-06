@@ -14,6 +14,8 @@ namespace Pandemonium {
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& filepath) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
 		std::string								source		  = ReadFile(filepath);
 		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(source);
 		Compile(shaderSources);
@@ -28,15 +30,23 @@ namespace Pandemonium {
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) : m_Name(name) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER]	= vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
 		Compile(sources);
 	}
 
-	OpenGLShader::~OpenGLShader() { glDeleteProgram(m_RendererID); }
+	OpenGLShader::~OpenGLShader() {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		glDeleteProgram(m_RendererID);
+	}
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
 		std::string	  result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if(in) {
@@ -53,6 +63,7 @@ namespace Pandemonium {
 	}
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source) {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
 		std::unordered_map<GLenum, std::string> shaderSources;
 
@@ -75,6 +86,7 @@ namespace Pandemonium {
 	}
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources) {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
 		GLuint program = glCreateProgram();
 		ASSERT(shaderSources.size() <= 2, "Too many shaders! Only support 2");
@@ -147,17 +159,41 @@ namespace Pandemonium {
 		m_RendererID = program;
 	}
 
-	void OpenGLShader::Bind() const { glUseProgram(m_RendererID); }
+	void OpenGLShader::Bind() const {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
-	void OpenGLShader::Unbind() const { glUseProgram(0); }
+		glUseProgram(m_RendererID);
+	}
 
-	void OpenGLShader::SetInt(const std::string& name, int value) { UploadUniformInt(name, value); }
+	void OpenGLShader::Unbind() const {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
-	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value) { UploadUniformFloat3(name, value); }
+		glUseProgram(0);
+	}
 
-	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value) { UploadUniformFloat4(name, value); }
+	void OpenGLShader::SetInt(const std::string& name, int value) {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
-	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) { UploadUniformMat4(name, value); }
+		UploadUniformInt(name, value);
+	}
+
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		UploadUniformFloat3(name, value);
+	}
+
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		UploadUniformFloat4(name, value);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		UploadUniformMat4(name, value);
+	}
 
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value) {
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());

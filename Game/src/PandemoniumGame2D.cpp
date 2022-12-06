@@ -11,17 +11,18 @@
 
 PandemoniumGame2D::PandemoniumGame2D() : Layer("2D"), m_CameraController(1280.0f / 720.0f) {}
 
-void PandemoniumGame2D::OnAttach() { m_CheckerboardTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png"); }
+void PandemoniumGame2D::OnAttach() {
+	PANDEMONIUM_PROFILE_FUNCTION();
 
-void PandemoniumGame2D::OnDetach() {}
+	m_CheckerboardTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+}
+
+void PandemoniumGame2D::OnDetach() { PANDEMONIUM_PROFILE_FUNCTION(); }
 
 void PandemoniumGame2D::OnUpdate(Pandemonium::Timestep ts) {
 	PANDEMONIUM_PROFILE_FUNCTION();
 
-	{
-		PANDEMONIUM_PROFILE_SCOPE("CameraController::OnUpdate");
-		m_CameraController.OnUpdate(ts);
-	}
+	m_CameraController.OnUpdate(ts);
 
 	{
 		PANDEMONIUM_PROFILE_SCOPE("Renderer Prep");
@@ -44,15 +45,6 @@ void PandemoniumGame2D::OnImGuiRender() {
 
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
-
-	// for(auto& result : m_ProfileResults) {
-	// 	char label[50];
-	// 	strcpy_s(label, "%.3fms ");
-	// 	strcat_s(label, result.Name);
-	// 	ImGui::Text(label, result.Time);
-	// }
-	// m_ProfileResults.clear();
-
 	ImGui::End();
 }
 

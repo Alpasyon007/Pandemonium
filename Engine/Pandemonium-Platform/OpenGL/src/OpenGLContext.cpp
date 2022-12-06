@@ -8,6 +8,8 @@ namespace Pandemonium {
 	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle) { ASSERT(windowHandle, "Window handle is null!"); }
 
 	void OpenGLContext::Init() {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ASSERT(status, "Could not initalize GLAD!");
@@ -18,5 +20,8 @@ namespace Pandemonium {
 		LOG_INFO("OpenGL Version: %s", glGetString(GL_VERSION));
 	}
 
-	void OpenGLContext::SwapBuffers() { glfwSwapBuffers(m_WindowHandle); }
+	void OpenGLContext::SwapBuffers() {
+		PANDEMONIUM_PROFILE_FUNCTION();
+		glfwSwapBuffers(m_WindowHandle);
+	}
 } // namespace Pandemonium

@@ -37,7 +37,6 @@ set_property(TARGET PandemoniumGame PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded
 # Define Windows Plaftorm if on Windows
 if(WIN32)
 	target_compile_definitions(PandemoniumGame PRIVATE "IMGUI_API=__declspec(dllimport)")
-	# target_compile_definitions(PandemoniumGame PRIVATE PANDEMONIUM_PLATFORM_WINDOWS) target_compile_definitions(PandemoniumGame PRIVATE PANDEMONIUM_BUILD_DLL)
 endif()
 
 target_include_directories(
@@ -48,7 +47,6 @@ target_include_directories(
 			${ENGINE_PATH}/Pandemonium-Log/Include
 			${ENGINE_PATH}/Pandemonium-Core/headers
 			${ENGINE_PATH}/Pandemonium-Log/headers
-			# ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Vec/headers ${ENGINE_PATH}/Pandemonium-Math/Pandemonium-Mat/headers
 			${ENGINE_PATH}/Pandemonium-Events/headers
 			${ENGINE_PATH}/Pandemonium-PreCompiled/headers
 			${ENGINE_PATH}/Pandemonium-Renderer/headers

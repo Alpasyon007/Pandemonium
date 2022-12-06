@@ -1,3 +1,5 @@
+#include "ppch.h"
+
 #include "OpenGLVertexArray.h"
 
 #include <glad/glad.h>
@@ -25,15 +27,33 @@ namespace Pandemonium {
 		return 0;
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray() { glCreateVertexArrays(1, &m_RendererID); }
+	OpenGLVertexArray::OpenGLVertexArray() {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
-	OpenGLVertexArray::~OpenGLVertexArray() { glDeleteVertexArrays(1, &m_RendererID); }
+		glCreateVertexArrays(1, &m_RendererID);
+	}
 
-	void OpenGLVertexArray::Bind() const { glBindVertexArray(m_RendererID); }
+	OpenGLVertexArray::~OpenGLVertexArray() {
+		PANDEMONIUM_PROFILE_FUNCTION();
 
-	void OpenGLVertexArray::Unbind() const { glBindVertexArray(0); }
+		glDeleteVertexArrays(1, &m_RendererID);
+	}
+
+	void OpenGLVertexArray::Bind() const {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		glBindVertexArray(m_RendererID);
+	}
+
+	void OpenGLVertexArray::Unbind() const {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
+		glBindVertexArray(0);
+	}
 
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+		PANDEMONIUM_PROFILE_FUNCTION();
+
 		ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
