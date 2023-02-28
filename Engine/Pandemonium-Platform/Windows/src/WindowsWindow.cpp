@@ -10,11 +10,11 @@
 #include <glad/glad.h>
 
 namespace Pandemonium {
-	static bool s_GLFWInitialized = false;
+	static uint8_t s_GLFWWindowCount = 0;
 
-	static void GLFWErrorCallback(int error, const char* desc) { LOG_ERROR("GLFW Error %d: %s", error, desc); }
+	static void	   GLFWErrorCallback(int error, const char* desc) { LOG_ERROR("GLFW Error %d: %s", error, desc); }
 
-	Window*		Window::Create(const WindowProps& props) { return new WindowsWindow(props); }
+	Window*		   Window::Create(const WindowProps& props) { return new WindowsWindow(props); }
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) {
 		PANDEMONIUM_PROFILE_FUNCTION();
@@ -35,14 +35,17 @@ namespace Pandemonium {
 
 		LOG_INFO("Creating window %s (%d, %d)", props.Title.data(), static_cast<int>(props.Width), static_cast<int>(props.Height));
 
-		if(!s_GLFWInitialized) {
+		if(s_GLFWWindowCount == 0) {
 			int success = glfwInit();
 			ASSERT(success, "Could not initalize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
-			s_GLFWInitialized = true;
 		}
 
-		m_Window  = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), m_Data.Title.c_str(), nullptr, nullptr);
+		{
+			PANDEMONIUM_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), m_Data.Title.c_str(), nullptr, nullptr);
+			++s_GLFWWindowCount;
+		}
 
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();

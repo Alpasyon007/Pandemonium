@@ -114,10 +114,10 @@ public:
 
 		m_FlatColorShader				 = Pandemonium::Shader::Create("FlatColor", flatColorVertexSrc, flatColorFragmentSrc);
 
-		auto textureShader				 = m_ShaderLibrary.Load("C:\\dev\\Pandemonium\\Game\\assets\\shaders\\Texture.glsl");
+		auto textureShader				 = m_ShaderLibrary.Load("C:\\dev\\Pandemonium\\Pandemonium Engine\\Game\\assets\\shaders\\Texture.glsl");
 
-		m_Texture						 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
-		m_IconTexture					 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Gear-icon.png");
+		m_Texture						 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Pandemonium Engine\\Game\\assets\\Checkerboard.png");
+		m_IconTexture					 = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Pandemonium Engine\\Game\\assets\\Gear-icon.png");
 
 		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(textureShader)->Bind();
 		std::dynamic_pointer_cast<Pandemonium::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);

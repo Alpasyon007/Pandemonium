@@ -97,8 +97,6 @@ namespace Pandemonium {
 			Instrumentor::Get().WriteProfile({m_Name, start, end, threadID});
 
 			m_Stopped = true;
-
-			std::cout << m_Name << " Finished Timer" << std::endl;
 		}
 	private:
 		const char*													m_Name;

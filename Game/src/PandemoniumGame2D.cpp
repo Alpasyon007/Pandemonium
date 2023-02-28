@@ -14,7 +14,7 @@ PandemoniumGame2D::PandemoniumGame2D() : Layer("2D"), m_CameraController(1280.0f
 void PandemoniumGame2D::OnAttach() {
 	PANDEMONIUM_PROFILE_FUNCTION();
 
-	m_CheckerboardTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Game\\assets\\Checkerboard.png");
+	m_CheckerboardTexture = Pandemonium::Texture2D::Create("C:\\dev\\Pandemonium\\Pandemonium Engine\\Game\\assets\\Checkerboard.png");
 }
 
 void PandemoniumGame2D::OnDetach() { PANDEMONIUM_PROFILE_FUNCTION(); }
